@@ -1,0 +1,5 @@
+#wget -O - http://artifactory-kfs.habana-labs.com/artifactory/api/gpg/key/public | sudo apt-key add -
+#wget -O - http://artifactory-sd.habana-labs.com/artifactory/api/gpg/key/public | sudo apt-key add -
+
+#deb https://artifactory-kfs.habana-labs.com/artifactory/repo-ubuntu20.04 focal testing
+deb [trusted=yes] http://artifactory-oc.amr.corp.intel.com/repo-ubuntu20.04 focal testing

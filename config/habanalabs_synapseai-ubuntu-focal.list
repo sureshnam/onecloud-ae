@@ -1,0 +1,9 @@
+#
+# Habanalabs Ltd. public repository configuration file.
+# For more information, refer to https://habana.ai/
+#
+
+# curl -s -X GET https://vault.habana.ai/artifactory/api/gpg/key/public | sudo APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add --
+
+# [habanalabs_synapseai_1.11.0]
+deb https://vault.habana.ai/artifactory/debian focal main

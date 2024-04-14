@@ -1,0 +1,15 @@
+{
+    "exec-opts": ["native.cgroupdriver=systemd"],
+    "default-ulimits": {
+        "memlock": {
+            "Name": "memlock",
+            "Soft": -1,
+            "Hard": -1
+        },
+        "nofile": {
+            "Name": "nofile",
+            "Soft": 1048576,
+            "Hard": 1048576
+        }
+    }
+}
