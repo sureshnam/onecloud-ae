@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 #
 # Copyright 2016-2022 Intel Corporation
 # Copyright 2016-2022 Habana Corporation
@@ -260,7 +260,7 @@ get_user_account_info() {
   echo "get_user_account_info"
   echo ""
 
-  ssh-keyscan reserve-hf-2.amr.corp.intel.com >> $HOME/.ssh/known_hosts
+  #ssh-keyscan reserve-hf-2.amr.corp.intel.com >> $HOME/.ssh/known_hosts
 
   RESERVE_SERVER=$(hostname -A | cut -d ' ' -f1)
   echo "RESERVE_SERVER=${RESERVE_SERVER}"
