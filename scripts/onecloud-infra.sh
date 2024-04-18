@@ -269,15 +269,20 @@ get_user_account_info() {
   echo "export RESERVE_SERVER=${RESERVE_SERVER}" >> ${WORKSPACE}/env
 
   #ssh -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ae-jenkins@reserve-hf-2.amr.corp.intel.com  "mkdir -p ${WORKSPACE}"
-  ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ubuntu@100.83.160.55 "mkdir -p ${WORKSPACE}"
+  ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ubuntu@100.83.160.55 "sudo mkdir -p ${WORKSPACE}"
   
   scp -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ${WORKSPACE}/env  ae-jenkins@reserve-hf-2.amr.corp.intel.com:${WORKSPACE}/${BUILD_NUMBER}.env
+  scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ${WORKSPACE}/env ubuntu@100.83.160.55:${WORKSPACE}/${BUILD_NUMBER}.env 
+  
   scp -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ${WORKSPACE}/${AE_AUTOMATION_REPO_NAME}/scripts/onecloud-infra.sh  ae-jenkins@reserve-hf-2.amr.corp.intel.com:${WORKSPACE}/
+  scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ${WORKSPACE}/${AE_AUTOMATION_REPO_NAME}/scripts/onecloud-infra.sh ubuntu@100.83.160.55:${WORKSPACE}/ 
 
   ssh -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ae-jenkins@reserve-hf-2.amr.corp.intel.com  "source ${WORKSPACE}/${BUILD_NUMBER}.env && source ${WORKSPACE}/onecloud-infra.sh && save_user_account_info && rm ${WORKSPACE}/${BUILD_NUMBER}.env"
+  ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ubuntu@100.83.160.55 "source ${WORKSPACE}/${BUILD_NUMBER}.env && source ${WORKSPACE}/onecloud-infra.sh && save_user_account_info && rm ${WORKSPACE}/${BUILD_NUMBER}.env"
   echo ""
 
   scp -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ae-jenkins@reserve-hf-2.amr.corp.intel.com:/${WORKSPACE}/USER_INFO_${BUILD_NUMBER}.txt  ${WORKSPACE}/
+  scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ubuntu@100.83.160.55:${WORKSPACE}/USER_INFO_${BUILD_NUMBER}.txt  ${WORKSPACE}/ 
   echo ""
 
   # scp .profile and .bashrc if necessary
@@ -287,6 +292,7 @@ get_user_account_info() {
   echo ""
 
   scp -i ~/.ssh/id_rsa-reserve-hf-2  ae-jenkins@reserve-hf-2.amr.corp.intel.com:${WORKSPACE}/USER_INFO_${BUILD_NUMBER}.authorized_keys  ${WORKSPACE}/
+  scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ubuntu@100.83.160.55:${WORKSPACE}/USER_INFO_${BUILD_NUMBER}.authorized_keys  ${WORKSPACE}/ 
   echo ""
 
   cat ${WORKSPACE}/USER_INFO_${BUILD_NUMBER}.authorized_keys
