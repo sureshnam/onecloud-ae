@@ -268,8 +268,9 @@ get_user_account_info() {
 
   echo "export RESERVE_SERVER=${RESERVE_SERVER}" >> ${WORKSPACE}/env
 
-  ssh -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ae-jenkins@reserve-hf-2.amr.corp.intel.com  "mkdir -p ${WORKSPACE}"
-
+  #ssh -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ae-jenkins@reserve-hf-2.amr.corp.intel.com  "mkdir -p ${WORKSPACE}"
+  ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no  ubuntu@100.83.160.55 "mkdir -p ${WORKSPACE}"
+  
   scp -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ${WORKSPACE}/env  ae-jenkins@reserve-hf-2.amr.corp.intel.com:${WORKSPACE}/${BUILD_NUMBER}.env
   scp -i ~/.ssh/id_rsa-reserve-hf-2 -o StrictHostKeyChecking=no  ${WORKSPACE}/${AE_AUTOMATION_REPO_NAME}/scripts/onecloud-infra.sh  ae-jenkins@reserve-hf-2.amr.corp.intel.com:${WORKSPACE}/
 
